@@ -2,7 +2,7 @@ package racingcar.Car;
 
 public class Name {
     private static final int MIN_NAME_LENGTH = 1;
-    private static final int MAX_NAME_LENGTH = 5;
+    private static final int MAX_NAME_LENGTH = 6;
     private String name;
 
     public Name(String carName) {
@@ -27,7 +27,7 @@ public class Name {
         }
 
         if (carName.length() > MAX_NAME_LENGTH){
-            throw new IllegalArgumentException("자동차의 이름은 5글자를 넘을 수 없습니다.");
+            throw new IllegalArgumentException("자동차의 이름은 5이하만 가능합니다.");
         }
     }
 }

@@ -10,12 +10,12 @@ public class TryCount {
         this.count = count;
     }
 
-    public int getTryCount(){
+    public int getTryCount() {
         return count;
     }
 
-    private void validateCount(int count){
-        if(count < MIN_TRY_COUNT){
+    private void validateCount(int count) {
+        if (count < MIN_TRY_COUNT) {
             throw new IllegalArgumentException("시도 횟수는 1 이상이어야합니다.");
         }
     }

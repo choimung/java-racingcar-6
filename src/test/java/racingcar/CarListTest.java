@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.Test;
 import racingcar.RacingCarGame.RacingCarGame;
 
-public class CarsTest {
+public class CarListTest {
     RacingCarGame game = new RacingCarGame();
 
     @Test
