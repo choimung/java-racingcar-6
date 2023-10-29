@@ -1,31 +1,26 @@
-package racingcar.Car;
+package racingcar.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import racingcar.Constants;
+import racingcar.utils.Constants;
 
 public class Car {
     private final Name name;
     private final Position position;
 
     public Car(String carName) {
-        this(carName, Constants.START_POSITION);
-    }
-
-    public Car(String carName, int position) {
         this.name = new Name(carName);
-        this.position = new Position(position);
+        this.position = new Position();
     }
 
-    public void accelerate() {
-        if (Randoms.pickNumberInRange(Constants.MINIMUM_RANGE, Constants.MAXIMUM_RANGE)
-                >= Constants.THRESHOLD_VALUE) {
+    public void move(int random) {
+        if(random >= Constants.THRESHOLD_VALUE){
             position.addPosition();
         }
     }
 
-    public String printCurrentPosition() {
+    public String printNameAndCurrentPosition() {
         String currentPosition = IntStream.range(Constants.START_POSITION, position.getPosition())
                 .mapToObj(i -> "-")
                 .collect(Collectors.joining());
