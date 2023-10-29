@@ -1,14 +1,14 @@
 package racingcar;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import racingcar.Car.Car;
 
 
 public class CarList {
 
-    private List<Car> cars;
+    private final List<Car> cars;
 
 
     public CarList(List<Car> cars) {
@@ -17,40 +17,36 @@ public class CarList {
     }
 
     public void validateCarNameDuplication(List<Car> cars) {
-        HashSet<String> nonDuplicateNames = new HashSet<>();
-
-        for (Car car : cars) {
-            nonDuplicateNames.add(car.getCarName());
-        }
+        Set<String> nonDuplicateNames = cars.stream()
+                .map(Car::getCarName)
+                .collect(Collectors.toSet());
 
         if (cars.size() != nonDuplicateNames.size()) {
-            throw new IllegalArgumentException("자동차의 이름이 중복됩니다.");
+            throw new IllegalArgumentException(Constants.ERROR_CAR_NAME_DUPLICATION);
         }
     }
 
-    public void moveAllCar() {
-        for (Car car : cars) {
-            car.move();
-        }
+    public void accelerateAllCars() {
+        cars.forEach(Car::accelerate);
     }
 
-    public void printCurrentPosition() {
-        for (Car car : cars) {
-            String carCurrentPosition = car.printCurrentPosition();
-            System.out.println(carCurrentPosition);
-        }
+    public List<String> AllCarCurrentPosition() {
+        return cars.stream()
+                .map(Car::CurrentPosition)
+                .collect(Collectors.toList());
     }
 
-    public void Winner() {
-        int maxPosition = cars.stream().mapToInt(Car::getPosition).max().orElse(Integer.MIN_VALUE);
+    public String WinnerList() {
+        int maxPosition = cars.stream().
+                mapToInt(Car::getPosition)
+                .max()
+                .orElse(Integer.MIN_VALUE);
 
-        List<String> winners = cars.stream().filter(car -> car.isWinner(maxPosition)).map(Car::getCarName)
+        List<String> winner = cars.stream()
+                .filter(car -> car.isMaxPosition(maxPosition))
+                .map(Car::getCarName)
                 .collect(Collectors.toList());
 
-        System.out.print(String.join(", ", winners));
-
-
+        return String.join(", ", winner);
     }
-
-
 }
