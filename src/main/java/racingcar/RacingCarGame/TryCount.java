@@ -1,9 +1,10 @@
 package racingcar.RacingCarGame;
 
+import racingcar.Constants;
+
 public class TryCount {
 
-    private static final int MIN_TRY_COUNT = 1;
-    private int count;
+    private final int count;
 
     public TryCount(int count) {
         validateCount(count);
@@ -15,8 +16,8 @@ public class TryCount {
     }
 
     private void validateCount(int count) {
-        if (count < MIN_TRY_COUNT) {
-            throw new IllegalArgumentException("시도 횟수는 1 이상이어야합니다.");
+        if (count < Constants.MIN_TRY_COUNT) {
+            throw new IllegalArgumentException(Constants.ERROR_MIN_TRY_COUNT);
         }
     }
 }
