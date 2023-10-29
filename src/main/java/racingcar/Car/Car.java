@@ -1,17 +1,14 @@
 package racingcar.Car;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import racingcar.Constants;
 
 public class Car {
-    private static final int START_POSITION = 0;
-    private static final int MINIMUM_RANGE = 0;
-    private static final int MAXIMUM_RANGE = 9;
-    private static final int THRESHOLD_VALUE = 4;
     private Name name;
     private Position position;
 
     public Car(String carName) {
-        this(carName, START_POSITION);
+        this(carName, Constants.START_POSITION);
     }
 
     public Car(String carName, int position) {
@@ -20,7 +17,7 @@ public class Car {
     }
 
     public int move() {
-        if (Randoms.pickNumberInRange(MINIMUM_RANGE, MAXIMUM_RANGE) >= THRESHOLD_VALUE) {
+        if (Randoms.pickNumberInRange(Constants.MINIMUM_RANGE, Constants.MAXIMUM_RANGE) >= Constants.THRESHOLD_VALUE) {
             position.addPosition();
         }
         return position.getPosition();
@@ -29,10 +26,14 @@ public class Car {
     public String printCurrentPosition() {
         StringBuffer output = new StringBuffer();
 
-        for(int i = 0; i < position.getPosition(); i++){
+        for (int i = 0; i < position.getPosition(); i++) {
             output.append("-");
         }
         return name.getName() + " : " + output;
+    }
+
+    public boolean isWinner(int maxPosition) {
+        return position.getPosition() >= maxPosition;
     }
 
 

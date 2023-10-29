@@ -10,6 +10,20 @@ import racingcar.CarList;
 
 public class RacingCarGame {
     CarList carList;
+    TryCount tryCount = new TryCount(5);
+
+    public void play(){
+        generateCars(getUserInputNames());
+        TryCount userInputTryCount = getUserInputTryCount();
+        System.out.println("실행결과");
+        for(int i = 0; i < userInputTryCount.getTryCount(); i++){
+            System.out.println();
+            move();
+            print();
+        }
+        System.out.println();
+        System.out.print("최종 우승자 : ");
+    }
 
     public void move(){
         carList.moveAllCar();
@@ -17,6 +31,10 @@ public class RacingCarGame {
 
     public void print(){
         carList.printCurrentPosition();
+    }
+
+    public void winner(){
+        carList.Winner();
     }
 
     public String getUserInputNames() {
