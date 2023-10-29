@@ -1,11 +1,13 @@
 package racingcar.Car;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import racingcar.Constants;
 
 public class Car {
-    private Name name;
-    private Position position;
+    private final Name name;
+    private final Position position;
 
     public Car(String carName) {
         this(carName, Constants.START_POSITION);
@@ -16,26 +18,23 @@ public class Car {
         this.position = new Position(position);
     }
 
-    public int move() {
-        if (Randoms.pickNumberInRange(Constants.MINIMUM_RANGE, Constants.MAXIMUM_RANGE) >= Constants.THRESHOLD_VALUE) {
+    public void accelerate() {
+        if (Randoms.pickNumberInRange(Constants.MINIMUM_RANGE, Constants.MAXIMUM_RANGE)
+                >= Constants.THRESHOLD_VALUE) {
             position.addPosition();
         }
-        return position.getPosition();
     }
 
     public String printCurrentPosition() {
-        StringBuffer output = new StringBuffer();
-
-        for (int i = 0; i < position.getPosition(); i++) {
-            output.append("-");
-        }
-        return name.getName() + " : " + output;
+        String currentPosition = IntStream.range(Constants.START_POSITION, position.getPosition())
+                .mapToObj(i -> "-")
+                .collect(Collectors.joining());
+        return name.getName() + " : " + currentPosition;
     }
 
-    public boolean isWinner(int maxPosition) {
+    public boolean isMaxPosition(int maxPosition) {
         return position.getPosition() >= maxPosition;
     }
-
 
     public int getPosition() {
         return this.position.getPosition();
